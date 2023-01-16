@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "415251305360",
+    "project_id": "digistore-18f80",
+    "storage_bucket": "digistore-18f80.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:415251305360:android:f1859e1f40736c39205915",
+        "android_client_info": {
+          "package_name": "com.digistore.com"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "415251305360-scs6d0rr4i1csbcbu1urtk5o3iqqavvk.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCGHP2-5oq33_6uReJq-pFCwc-SLmK0Zj8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "415251305360-scs6d0rr4i1csbcbu1urtk5o3iqqavvk.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
