@@ -1,4 +1,4 @@
-var BASE_URL = "http://192.168.0.101:9000/api";
+var BASE_URL = "http://192.168.0.102:9000/api";
 //categories
 var category = "$BASE_URL/categories";
 var createCategory="$category/create";
