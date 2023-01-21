@@ -2,6 +2,7 @@ import 'package:digi_store/bindings.dart';
 import 'package:digi_store/controllers/auth_controller.dart';
 import 'package:digi_store/controllers/category_controller.dart';
 import 'package:digi_store/controllers/home_controller.dart';
+import 'package:digi_store/controllers/user_controller.dart';
 import 'package:digi_store/screens/home/home_page.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -17,6 +18,7 @@ class MyApp extends StatelessWidget {
   CategoryController categoryController =
       Get.put<CategoryController>(CategoryController());
   AuthController authController = Get.put<AuthController>(AuthController());
+  UserController userController = Get.put<UserController>(UserController());
 
   @override
   Widget build(BuildContext context) {

@@ -11,4 +11,10 @@ class Users{
 
   }
 
+  getUserById({required String uid})async {
+    var response=await DbBase().databaseRequest("$user/$uid", DbBase().getRequestType);
+    return jsonDecode(response);
+
+  }
+
 }

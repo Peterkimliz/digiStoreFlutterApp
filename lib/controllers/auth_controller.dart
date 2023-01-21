@@ -1,3 +1,4 @@
+import 'package:digi_store/controllers/user_controller.dart';
 import 'package:digi_store/screens/home/home_page.dart';
 import 'package:digi_store/services/users.dart';
 import 'package:flutter/material.dart';
@@ -31,12 +32,14 @@ class AuthController extends GetxController {
         "password": textEditingControllerPassword.text.trim()
       };
       var response = await Users.loginUser(body: body);
+      print("response is ${ response["user"]["id"]}");
       if (response["message"] != null) {
         ScaffoldMessenger.of(context)
             .showSnackBar(SnackBar(content: Text(response["message"])));
       } else {
         SharedPreferences preferences = await SharedPreferences.getInstance();
         preferences.setString("token", response["token"]);
+        preferences.setString("userId", response["user"]["id"]);
         User user = User.fromJson(response["user"]);
         currentUser.value = user;
         currentUser.refresh();
@@ -49,15 +52,12 @@ class AuthController extends GetxController {
       print(e);
     }
   }
-  getUid()async{
-    SharedPreferences sharedPreferences=await SharedPreferences.getInstance();
-    String ?uid=sharedPreferences.getString("userId");
-    if (uid!=null) {
 
-
+  getUid() async {
+    SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+    String? uid = sharedPreferences.getString("userId");
+    if (uid != null) {
+      Get.find<UserController>().getUserById(uid);
     }
-
-
   }
-
 }
