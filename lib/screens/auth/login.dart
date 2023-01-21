@@ -45,7 +45,30 @@ class LoginPage extends StatelessWidget {
                 ],
               )),
               SizedBox(height: 30),
-              authButton(title: "Login", onPressed: () {}),
+              Obx(() => authButton(
+                  widget: authController.loginUserLoad.value
+                      ? Center(
+                          child: CircularProgressIndicator(
+                            backgroundColor: Colors.white,
+                          ),
+                        )
+                      : Center(
+                          child: Text(
+                            "Login".toUpperCase(),
+                            style: TextStyle(
+                                color: Colors.white,
+                                fontWeight: FontWeight.bold),
+                          ),
+                        ),
+                  onPressed: () {
+                    var validated = authController.validateInputs();
+                    if (!validated) {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(content: Text("Please fill all fields")));
+                    } else {
+                      authController.loginUser(context: context);
+                    }
+                  })),
               SizedBox(
                 height: 20,
               ),

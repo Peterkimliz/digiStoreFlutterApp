@@ -26,7 +26,11 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
           primarySwatch: Colors.blue, splashColor: Colors.transparent),
       initialBinding: AppBindings(),
-      home: HomePage(),
+      home: FutureBuilder(
+          future: authController.getUid(),
+          builder: (BuildContext context,snapshot) {
+        return HomePage();
+      }),
     );
   }
 }

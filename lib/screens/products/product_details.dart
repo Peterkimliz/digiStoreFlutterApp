@@ -1,4 +1,5 @@
 import 'package:blurry_modal_progress_hud/blurry_modal_progress_hud.dart';
+import 'package:digi_store/controllers/auth_controller.dart';
 import 'package:digi_store/controllers/product_controller.dart';
 import 'package:digi_store/models/product.dart';
 import 'package:digi_store/models/product_review.dart';
@@ -18,6 +19,7 @@ import 'components/home_product_card.dart';
 class ProductDetails extends StatelessWidget {
   Product product;
   ProductController productController = Get.find<ProductController>();
+  AuthController authController = Get.find<AuthController>();
 
   ProductDetails({Key? key, required this.product}) : super(key: key) {
     productController.getProductReviews(product.id!);
@@ -296,7 +298,9 @@ class ProductDetails extends StatelessWidget {
                       flex: 2,
                       child: InkWell(
                         onTap: () {
-                          Get.to(() => LoginPage());
+                          if (authController.currentUser.value == null) {
+                            Get.to(() => LoginPage());
+                          }
                         },
                         child: Container(
                           decoration: BoxDecoration(

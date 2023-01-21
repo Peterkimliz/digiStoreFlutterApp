@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-Widget authButton({required title, required onPressed}) {
+Widget authButton({required Widget widget, required onPressed}) {
   return Center(
     child: InkWell(
       onTap: () => onPressed(),
@@ -10,12 +10,7 @@ Widget authButton({required title, required onPressed}) {
         decoration: BoxDecoration(
             color: Colors.lightGreen.withOpacity(0.8),
             borderRadius: BorderRadius.circular(30)),
-        child: Center(
-          child: Text(
-            "$title".toUpperCase(),
-            style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
-          ),
-        ),
+        child:widget,
       ),
     ),
   );

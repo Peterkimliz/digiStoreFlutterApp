@@ -1,4 +1,6 @@
+import 'package:digi_store/controllers/auth_controller.dart';
 import 'package:digi_store/models/product.dart';
+import 'package:digi_store/screens/auth/login.dart';
 import 'package:digi_store/screens/products/product_details.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -7,6 +9,7 @@ import '../../../widgets/big_title.dart';
 import '../../../widgets/small_text.dart';
 
 Widget homeProductCard({required Product product}) {
+  AuthController authController = Get.find<AuthController>();
   return Padding(
     padding: EdgeInsets.only(left: 5),
     child: InkWell(
@@ -57,17 +60,24 @@ Widget homeProductCard({required Product product}) {
                           children: [
                             bigTitle(
                                 title: "200", color: Colors.black, size: 13),
-                            Container(
-                              padding: EdgeInsets.only(
-                                  left: 5, right: 5, top: 3, bottom: 3),
-                              decoration: BoxDecoration(
-                                  color: Colors.green,
-                                  borderRadius: BorderRadius.circular(5)),
-                              child: Center(
-                                child: Icon(
-                                  Icons.shopping_basket_outlined,
-                                  color: Colors.white,
-                                  size: 15,
+                            InkWell(
+                              onTap: () {
+                                if (authController.currentUser.value == null) {
+                                  Get.to(() => LoginPage());
+                                }
+                              },
+                              child: Container(
+                                padding: EdgeInsets.only(
+                                    left: 5, right: 5, top: 3, bottom: 3),
+                                decoration: BoxDecoration(
+                                    color: Colors.green,
+                                    borderRadius: BorderRadius.circular(5)),
+                                child: Center(
+                                  child: Icon(
+                                    Icons.shopping_basket_outlined,
+                                    color: Colors.white,
+                                    size: 15,
+                                  ),
                                 ),
                               ),
                             )
@@ -82,7 +92,11 @@ Widget homeProductCard({required Product product}) {
                   top: 3,
                   right: 3,
                   child: InkWell(
-                    onTap: () {},
+                    onTap: () {
+                      if (authController.currentUser.value == null) {
+                        Get.to(() => LoginPage());
+                      }
+                    },
                     child: Icon(
                       Icons.favorite_border_outlined,
                       color: Colors.white,

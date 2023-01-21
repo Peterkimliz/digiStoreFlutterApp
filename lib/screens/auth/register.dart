@@ -60,22 +60,27 @@ class RegisterPage extends StatelessWidget {
                 ],
               )),
               SizedBox(height: 30),
-              authButton(title: "Register", onPressed: () {}),
+              authButton(
+                  widget: Center(
+                    child: Text(
+                      "Register".toUpperCase(),
+                      style: TextStyle(
+                          color: Colors.white, fontWeight: FontWeight.bold),
+                    ),
+                  ),
+                  onPressed: () {}),
               SizedBox(
                 height: 20,
               ),
               Center(
                 child: Center(
                     child: RichText(
-
                   text: TextSpan(
                     style: TextStyle(color: Colors.black, fontSize: 17),
-
                     children: <TextSpan>[
                       TextSpan(
                           text: 'Already have an account?',
                           style: TextStyle(color: Colors.grey)),
-
                       TextSpan(
                           text: 'Login',
                           recognizer: TapGestureRecognizer()

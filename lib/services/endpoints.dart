@@ -1,4 +1,9 @@
 var BASE_URL = "http://192.168.0.102:9000/api";
+
+//auth
+var auth="$BASE_URL/auth";
+var signin="$auth/signin";
+var signup="$auth/signup";
 //categories
 var category = "$BASE_URL/categories";
 var createCategory="$category/create";
