@@ -1,7 +1,9 @@
 import 'package:blurry_modal_progress_hud/blurry_modal_progress_hud.dart';
+import 'package:digi_store/controllers/auth_controller.dart';
 import 'package:digi_store/controllers/product_controller.dart';
 import 'package:digi_store/models/product.dart';
 import 'package:digi_store/models/product_review.dart';
+import 'package:digi_store/screens/auth/login.dart';
 import 'package:digi_store/widgets/big_title.dart';
 import 'package:digi_store/widgets/small_text.dart';
 import 'package:digi_store/widgets/user_review.dart';
@@ -17,6 +19,7 @@ import 'components/home_product_card.dart';
 class ProductDetails extends StatelessWidget {
   Product product;
   ProductController productController = Get.find<ProductController>();
+  AuthController authController = Get.find<AuthController>();
 
   ProductDetails({Key? key, required this.product}) : super(key: key) {
     productController.getProductReviews(product.id!);
@@ -293,24 +296,31 @@ class ProductDetails extends StatelessWidget {
                 children: [
                   Expanded(
                       flex: 2,
-                      child: Container(
-                        decoration: BoxDecoration(
-                            color: Colors.white,
-                            border: Border.all(color: Colors.green, width: 1),
-                            borderRadius: BorderRadius.circular(3)),
-                        padding: EdgeInsets.all(10),
-                        child: Row(
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            Icon(Icons.favorite, color: Colors.green),
-                            Text(
-                              "Save".toUpperCase(),
-                              textAlign: TextAlign.center,
-                              style: TextStyle(
-                                  color: Colors.green,
-                                  fontWeight: FontWeight.w600),
-                            ),
-                          ],
+                      child: InkWell(
+                        onTap: () {
+                          if (authController.currentUser.value == null) {
+                            Get.to(() => LoginPage());
+                          }
+                        },
+                        child: Container(
+                          decoration: BoxDecoration(
+                              color: Colors.white,
+                              border: Border.all(color: Colors.green, width: 1),
+                              borderRadius: BorderRadius.circular(3)),
+                          padding: EdgeInsets.all(10),
+                          child: Row(
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              Icon(Icons.favorite, color: Colors.green),
+                              Text(
+                                "Save".toUpperCase(),
+                                textAlign: TextAlign.center,
+                                style: TextStyle(
+                                    color: Colors.green,
+                                    fontWeight: FontWeight.w600),
+                              ),
+                            ],
+                          ),
                         ),
                       )),
                   SizedBox(
