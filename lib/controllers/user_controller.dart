@@ -10,6 +10,7 @@ class UserController extends GetxController {
   getUserById(String uid) async {
     try {
       var response = await Users().getUserById(uid:uid);
+      print(response);
       if (response["message"] != null) {
       } else {
         User user = User.fromJson(response);

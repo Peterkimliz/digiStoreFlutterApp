@@ -16,5 +16,10 @@ class Products{
     return jsonDecode(response);
   }
 
+  favouriteProduct({required productId, required userId}) async{
+    var response=await DbBase().databaseRequest("$wishlist/$productId/$userId",DbBase().putRequestType);
+    return jsonDecode(response);
+  }
+
 
 }

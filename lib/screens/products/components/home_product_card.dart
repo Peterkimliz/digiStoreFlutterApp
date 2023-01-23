@@ -1,4 +1,5 @@
 import 'package:digi_store/controllers/auth_controller.dart';
+import 'package:digi_store/controllers/product_controller.dart';
 import 'package:digi_store/models/product.dart';
 import 'package:digi_store/screens/auth/login.dart';
 import 'package:digi_store/screens/products/product_details.dart';
@@ -10,6 +11,7 @@ import '../../../widgets/small_text.dart';
 
 Widget homeProductCard({required Product product}) {
   AuthController authController = Get.find<AuthController>();
+  ProductController productController=Get.find<ProductController>();
   return Padding(
     padding: EdgeInsets.only(left: 5),
     child: InkWell(
@@ -95,11 +97,20 @@ Widget homeProductCard({required Product product}) {
                     onTap: () {
                       if (authController.currentUser.value == null) {
                         Get.to(() => LoginPage());
+                      }else{
+                        productController.favouriteProduct(product:product);
+
                       }
                     },
                     child: Icon(
-                      Icons.favorite_border_outlined,
-                      color: Colors.white,
+                      authController.currentUser.value?.wishlist?.indexWhere(
+                                  (element) => element == product.id) !=
+                              -1
+                          ? Icons.favorite_outlined
+                          : Icons.favorite_border_outlined,
+                      color:  authController.currentUser.value?.wishlist?.indexWhere(
+                              (element) => element == product.id) !=
+                          -1?Colors.deepPurple:Colors.white,
                     ),
                   ))
             ],
