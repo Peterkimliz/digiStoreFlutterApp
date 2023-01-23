@@ -95,10 +95,19 @@ class ProductDetails extends StatelessWidget {
                                           color: Colors.white,
                                         )),
                                     IconButton(
-                                        onPressed: () {},
+                                        onPressed: () {
+                                          productController.favouriteProduct(product: product);
+                                        },
                                         icon: Icon(
-                                          Icons.shopping_cart,
-                                          color: Colors.white,
+                                          Icons.favorite_outlined,
+                                          color: authController.currentUser
+                                                      .value?.wishlist
+                                                      ?.indexWhere((element) =>
+                                                          element ==
+                                                          product.id) !=
+                                                  -1
+                                              ? Colors.deepPurple
+                                              : Colors.white,
                                         ))
                                   ],
                                 ),

@@ -1,3 +1,4 @@
+import 'package:digi_store/controllers/auth_controller.dart';
 import 'package:digi_store/models/product.dart';
 import 'package:digi_store/models/product_review.dart';
 import 'package:digi_store/services/product.dart';
@@ -58,5 +59,27 @@ class ProductController extends GetxController {
                 .toList()
                 .reduce((value, element) => value! + element!)! /
             productReviews.length;
+  }
+
+  favouriteProduct({required Product product}) async {
+    try {
+      AuthController authController = Get.find<AuthController>();
+      int? index = authController.currentUser.value?.wishlist
+          ?.indexWhere((element) => element == product.id);
+      if (index == -1) {
+        authController.currentUser.value?.wishlist?.add(product.id!);
+        products.refresh();
+      } else {
+        authController.currentUser.value?.wishlist
+            ?.removeWhere((element) => element == product.id);
+        products.refresh();
+      }
+
+      var response = await Products().favouriteProduct(
+          productId: product.id, userId: authController.currentUser.value?.id);
+      print(response);
+    } catch (e) {
+      print(e);
+    }
   }
 }

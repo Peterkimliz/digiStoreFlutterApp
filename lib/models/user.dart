@@ -5,12 +5,14 @@ class User {
   String? phone;
   String? userType;
   String? profileImage;
+  List<String>?wishlist;
 
   User(
       {this.id,
       this.email,
       this.phone,
       this.username,
+        this.wishlist,
       this.userType,
       this.profileImage});
 
@@ -18,6 +20,7 @@ class User {
       id: json["id"],
       email: json["email"],
       username: json["username"],
+      wishlist: List<String>.from(json["wishlist"].map((e)=>e)),
       phone: json["phone"],
       userType: json["userType"],
       profileImage: json["profileImage"]);

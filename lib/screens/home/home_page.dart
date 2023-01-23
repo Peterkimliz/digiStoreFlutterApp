@@ -17,8 +17,10 @@ class HomePage extends StatelessWidget {
             homeController.currentPage.value = value;
           },
           items: [
-            BottomNavigationBarItem(icon: Icon(Icons.home),label: "home"),
-            BottomNavigationBarItem(icon: Icon(Icons.person),label: "pro")
+            BottomNavigationBarItem(icon: Icon(Icons.home), label: "home"),
+            BottomNavigationBarItem(
+                icon: Icon(Icons.shopping_cart), label: "Cart"),
+            BottomNavigationBarItem(icon: Icon(Icons.person), label: "pro")
           ],
         ),
       ),

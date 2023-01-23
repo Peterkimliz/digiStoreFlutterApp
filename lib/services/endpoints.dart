@@ -1,4 +1,4 @@
-var BASE_URL = "http://192.168.0.102:9000/api";
+var BASE_URL = "http://192.168.0.101:9000/api";
 
 //auth
 var auth="$BASE_URL/auth";
@@ -18,3 +18,6 @@ var reviews ="$BASE_URL/reviews";
 var product="$BASE_URL/products";
 var allProducts="$product/all";
 var productReviews="$reviews/product/all/";
+
+//wishlist
+var wishlist="$BASE_URL/wishlist";
