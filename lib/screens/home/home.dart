@@ -52,9 +52,11 @@ class Home extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Padding(
-                            padding: EdgeInsets.only(left: 5, right: 5,top: 3),
+                            padding: EdgeInsets.only(left: 5, right: 5, top: 3),
                             child: bigTitle(
-                                title: "Digi Store", color: Colors.orangeAccent,size: 20),
+                                title: "Digi Store",
+                                color: Colors.orangeAccent,
+                                size: 20),
                           ),
                           SizedBox(
                             height: 10,
@@ -62,26 +64,31 @@ class Home extends StatelessWidget {
                           Padding(
                             padding: EdgeInsets.only(left: 5, right: 5),
                             child: smallTitle(
-                                title: "With Millions of Product at Your Service", color: Colors.grey,size: 13),
+                                title:
+                                    "With Millions of Product at Your Service",
+                                color: Colors.grey,
+                                size: 13),
                           ),
-                          SizedBox(height: 10,),
+                          SizedBox(
+                            height: 10,
+                          ),
                           Container(
                             margin: EdgeInsets.all(5),
                             padding: EdgeInsets.all(10),
                             width: double.infinity,
                             decoration: BoxDecoration(
-                              color: Colors.grey.withOpacity(0.3),
-                              borderRadius: BorderRadius.circular(20)
-                            ),
+                                color: Colors.grey.withOpacity(0.3),
+                                borderRadius: BorderRadius.circular(20)),
                             child: Row(
                               children: [
                                 Icon(Icons.search),
-                                SizedBox(width: 3,),
+                                SizedBox(
+                                  width: 3,
+                                ),
                                 smallTitle(title: "Search", color: Colors.grey)
                               ],
                             ),
                           ),
-
                           Padding(
                             padding: EdgeInsets.only(left: 5, right: 5),
                             child: bigTitle(
@@ -179,13 +186,58 @@ class Home extends StatelessWidget {
                             children: [
                               Padding(
                                 padding: EdgeInsets.only(left: 5, right: 5),
-                                child: bigTitle(
-                                    title: "Popular Shops",
-                                    color: Colors.black),
+                                child: Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    bigTitle(
+                                        title: "Popular Shops",
+                                        color: Colors.black),
+                                    smallTitle(
+                                        title: "View All", color: Colors.green)
+                                  ],
+                                ),
                               ),
-                              SizedBox(
-                                height: 10,
-                              ),
+                              SizedBox(height: 10),
+                              Container(
+                                height: 180,
+                                width: double.infinity,
+                                child: ListView.builder(
+                                    itemCount: 10,
+                                    shrinkWrap: true,
+                                    scrollDirection: Axis.horizontal,
+                                    itemBuilder: (context, index) {
+                                      return Container(
+                                        padding: EdgeInsets.all(5),
+                                        child: Stack(
+                                          children: [
+                                            Container(
+                                              height:180,
+                                              width: 180,
+                                              decoration: BoxDecoration(
+                                                borderRadius:
+                                                    BorderRadius.circular(10),
+                                                image: DecorationImage(
+                                                  fit: BoxFit.cover,
+                                                    image: NetworkImage(
+                                                        "https://images.pexels.com/photos/264636/pexels-photo-264636.jpeg?auto=compress&cs=tinysrgb&w=800")),
+                                              ),
+                                            ),
+                                            Positioned(
+                                              child: Column(
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment.start,
+                                                children: [],
+                                              ),
+                                              left: 20,
+                                              right: 0,
+                                              bottom: 20,
+                                            )
+                                          ],
+                                        ),
+                                      );
+                                    }),
+                              )
                             ],
                           ),
                         ],
