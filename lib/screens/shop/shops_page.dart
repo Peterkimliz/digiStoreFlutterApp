@@ -18,6 +18,7 @@ class ShopsPage extends StatelessWidget {
             )),
         title: Text("All Shops", style: TextStyle(color: Colors.black)),
       ),
+      
     );
   }
 }
