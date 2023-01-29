@@ -142,22 +142,19 @@ class ReviewPage extends StatelessWidget {
               SizedBox(
                 height: 10,
               ),
-          RatingBar.builder(
-            initialRating: 0,
-            minRating: 1,
-            direction: Axis.horizontal,
-            allowHalfRating: false,
-            itemCount: 5,
-            itemPadding: const EdgeInsets.symmetric(horizontal: 4.0),
-            itemBuilder: (context, _) => const Icon(
-              Icons.star,
-              color: Colors.amber,
-            ),
-            onRatingUpdate: (rating) {
-
-            },
-          ),
-
+              RatingBar.builder(
+                initialRating: 0,
+                minRating: 1,
+                direction: Axis.horizontal,
+                allowHalfRating: false,
+                itemCount: 5,
+                itemPadding: const EdgeInsets.symmetric(horizontal: 4.0),
+                itemBuilder: (context, _) => const Icon(
+                  Icons.star,
+                  color: Colors.amber,
+                ),
+                onRatingUpdate: (rating) {},
+              ),
             ],
           ),
         ),
