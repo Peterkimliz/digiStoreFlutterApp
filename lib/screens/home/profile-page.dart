@@ -1,3 +1,4 @@
+import 'package:digi_store/screens/user/adress/address_page.dart';
 import 'package:flutter/material.dart';
 class ProfilePage extends StatelessWidget {
   const ProfilePage({Key? key}) : super(key: key);
@@ -6,7 +7,7 @@ class ProfilePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
 
-      body: Center(child: Text("profile Page")),
+      body: AddressPage(),
     );
   }
 }
