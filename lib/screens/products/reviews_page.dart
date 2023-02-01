@@ -1,11 +1,16 @@
+import 'dart:io';
+
+import 'package:digi_store/controllers/reviews_controller.dart';
 import 'package:digi_store/widgets/big_title.dart';
 import 'package:digi_store/widgets/small_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:get/get.dart';
+import 'package:image_picker/image_picker.dart';
 
 class ReviewPage extends StatelessWidget {
   ReviewPage({Key? key}) : super(key: key);
+  ReviewController reviewController = Get.find<ReviewController>();
 
   @override
   Widget build(BuildContext context) {
@@ -198,11 +203,19 @@ class ReviewPage extends StatelessWidget {
                       bigTitle(title: "Select image from", color: Colors.black),
                 ),
                 ListTile(
+                  onTap: () {
+                    Get.back();
+                    selectImage(type: "camera");
+                  },
                   leading: Icon(Icons.camera_alt),
                   title:
                       bigTitle(title: "Camera", color: Colors.black, size: 14),
                 ),
                 ListTile(
+                  onTap: () {
+                    Get.back();
+                    selectImage(type: "gallery");
+                  },
                   leading: Icon(Icons.camera),
                   title:
                       bigTitle(title: "Gallery", color: Colors.black, size: 14),
@@ -211,5 +224,16 @@ class ReviewPage extends StatelessWidget {
             ),
           );
         });
+  }
+
+  selectImage({required String type}) async {
+    print(type);
+    XFile? pickedImage = await ImagePicker().pickImage(
+        source: type == "gallery" ? ImageSource.gallery : ImageSource.camera,
+        maxWidth: 1800,
+        maxHeight: 1800);
+    if (pickedImage != null) {
+      reviewController.selectedReviewImage = pickedImage;
+    }
   }
 }

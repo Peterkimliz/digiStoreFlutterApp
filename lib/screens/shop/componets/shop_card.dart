@@ -1,3 +1,4 @@
+import 'package:digi_store/screens/products/favourite_page.dart';
 import 'package:digi_store/screens/products/reviews_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
@@ -9,7 +10,7 @@ import '../../../widgets/small_text.dart';
 Widget shopCard() {
   return InkWell(
     onTap: () {
-      Get.to(() => ReviewPage());
+      Get.to(() => FavouritePage());
     },
     child: Container(
       padding: EdgeInsets.all(5),

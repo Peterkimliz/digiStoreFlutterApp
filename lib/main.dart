@@ -2,6 +2,7 @@ import 'package:digi_store/bindings.dart';
 import 'package:digi_store/controllers/auth_controller.dart';
 import 'package:digi_store/controllers/category_controller.dart';
 import 'package:digi_store/controllers/home_controller.dart';
+import 'package:digi_store/controllers/reviews_controller.dart';
 import 'package:digi_store/controllers/user_controller.dart';
 import 'package:digi_store/screens/home/home_page.dart';
 import 'package:flutter/material.dart';
@@ -19,6 +20,7 @@ class MyApp extends StatelessWidget {
       Get.put<CategoryController>(CategoryController());
   AuthController authController = Get.put<AuthController>(AuthController());
   UserController userController = Get.put<UserController>(UserController());
+  ReviewController reviewController = Get.put<ReviewController>(ReviewController());
 
   @override
   Widget build(BuildContext context) {
