@@ -7,9 +7,12 @@ import 'package:get/get.dart';
 class ProductController extends GetxController {
   RxBool loadingProducts = RxBool(false);
   RxBool loadingProductReviews = RxBool(false);
+  RxBool loadingProductByCategory = RxBool(false);
   RxList<Product> products = RxList([]);
+  RxList<Product> productsByCategory = RxList([]);
   RxList<ProductReview> productReviews = RxList([]);
   RxDouble avarageReviews = RxDouble(0.0);
+  RxInt productsCategorycategoryPageNumber=RxInt(0);
 
   getPaginatedProducts() async {
     try {
@@ -81,5 +84,27 @@ class ProductController extends GetxController {
     } catch (e) {
       print(e);
     }
+  }
+
+ getProductsByCategory({String? id})async {
+ try{
+   loadingProductByCategory.value=false;
+  var response=await Products().getProductsByCategory(categoryId:id,page:productsCategorycategoryPageNumber.value);
+  if (response != null) {
+        List dataResponse = response;
+        List<Product> rawProduct =
+            dataResponse.map((e) => Product.fromJson(e)).toList();
+        productsByCategory.assignAll(rawProduct);
+    
+      } else {
+        productsByCategory.value = RxList([]);
+      }
+
+    loadingProductByCategory.value=false;
+ }catch(e){
+  loadingProductByCategory.value=false;
+  print(e);
+ }
+
   }
 }

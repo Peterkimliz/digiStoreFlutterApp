@@ -21,5 +21,10 @@ class Products{
     return jsonDecode(response);
   }
 
+  getProductsByCategory({String? categoryId, required int page}) async{
+    var response=await DbBase().databaseRequest("$productByCategory/$categoryId?$page",DbBase().getRequestType);
+    return jsonDecode(response);
+  }
+
 
 }

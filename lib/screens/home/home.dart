@@ -4,8 +4,10 @@ import 'package:digi_store/controllers/product_controller.dart';
 import 'package:digi_store/models/categories.dart';
 import 'package:digi_store/models/product.dart';
 import 'package:digi_store/screens/products/components/home_product_card.dart';
+import 'package:digi_store/screens/products/product_category.dart';
 import 'package:digi_store/screens/shop/componets/shop_card.dart';
 import 'package:digi_store/screens/shop/shops_page.dart';
+import 'package:digi_store/utils/loading_widgets.dart';
 import 'package:digi_store/widgets/big_title.dart';
 import 'package:digi_store/widgets/small_text.dart';
 import 'package:flutter/material.dart';
@@ -109,7 +111,8 @@ class Home extends StatelessWidget {
                                     shrinkWrap: true,
                                     scrollDirection: Axis.horizontal,
                                     itemBuilder: (context, index) {
-                                      return categoryShimmer(context);
+                                      return LoadingWidgets()
+                                          .categoryShimmer(context);
                                     })
                                 : ListView.builder(
                                     scrollDirection: Axis.horizontal,
@@ -124,7 +127,11 @@ class Home extends StatelessWidget {
                                       return Padding(
                                         padding: EdgeInsets.only(left: 10),
                                         child: InkWell(
-                                          onTap: () {},
+                                          onTap: () {
+                                            Get.to(() => ProductCategory(
+                                                  category: category,
+                                                ));
+                                          },
                                           child: Column(
                                             children: [
                                               Container(
@@ -227,30 +234,5 @@ class Home extends StatelessWidget {
             ),
           ),
         ));
-  }
-
-  Widget categoryShimmer(context) {
-    return Shimmer.fromColors(
-        child: Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              CircleAvatar(
-                radius: 25.0,
-              ),
-              SizedBox(
-                height: 10,
-              ),
-              Container(
-                width: 0,
-                height: 15,
-                color: Theme.of(context).scaffoldBackgroundColor,
-              )
-            ],
-          ),
-        ),
-        baseColor: Colors.grey.shade200,
-        highlightColor: Colors.grey.shade100);
   }
 }
