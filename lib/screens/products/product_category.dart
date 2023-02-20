@@ -19,7 +19,6 @@ class ProductCategory extends StatelessWidget {
   Widget build(BuildContext context) {
     return RefreshIndicator(
       onRefresh: () async {
-        productController.productsCategorycategoryPageNumber.value = 0;
         productController.getProductsByCategory(id: category.id);
       },
       child: Scaffold(

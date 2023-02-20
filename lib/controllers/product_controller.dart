@@ -8,11 +8,14 @@ class ProductController extends GetxController {
   RxBool loadingProducts = RxBool(false);
   RxBool loadingProductReviews = RxBool(false);
   RxBool loadingProductByCategory = RxBool(false);
+  RxBool loadingMoreProductsByCategory = RxBool(false);
+  RxBool hasNextPage = RxBool(true);
+  RxInt productsCategorycategoryPageNumber = RxInt(0);
+
   RxList<Product> products = RxList([]);
   RxList<Product> productsByCategory = RxList([]);
   RxList<ProductReview> productReviews = RxList([]);
   RxDouble avarageReviews = RxDouble(0.0);
-  RxInt productsCategorycategoryPageNumber=RxInt(0);
 
   getPaginatedProducts() async {
     try {
@@ -86,25 +89,57 @@ class ProductController extends GetxController {
     }
   }
 
- getProductsByCategory({String? id})async {
- try{
-   loadingProductByCategory.value=false;
-  var response=await Products().getProductsByCategory(categoryId:id,page:productsCategorycategoryPageNumber.value);
-  if (response != null) {
+  getProductsByCategory({String? id}) async {
+    try {
+      loadingProductByCategory.value = false;
+      var response = await Products().getProductsByCategory(
+          categoryId: id, page: productsCategorycategoryPageNumber.value);
+      if (response != null) {
         List dataResponse = response;
         List<Product> rawProduct =
             dataResponse.map((e) => Product.fromJson(e)).toList();
         productsByCategory.assignAll(rawProduct);
-    
       } else {
         productsByCategory.value = RxList([]);
       }
 
-    loadingProductByCategory.value=false;
- }catch(e){
-  loadingProductByCategory.value=false;
-  print(e);
- }
+      loadingProductByCategory.value = false;
+    } catch (e) {
+      loadingProductByCategory.value = false;
+      print(e);
+    }
+  }
 
+  loadMoreProductsByCategory({String? id}) async {
+    if (loadingMoreProductsByCategory.value == false &&
+        loadingMoreProductsByCategory.value == false &&
+        hasNextPage.value == true) {
+      productsCategorycategoryPageNumber.value +=
+          productsCategorycategoryPageNumber.value;
+      try {
+        loadingMoreProductsByCategory.value = true;
+        var response = await Products().getProductsByCategory(
+            categoryId: id, page: productsCategorycategoryPageNumber.value);
+        if (response != null) {
+          List dataResponse = response;
+          List<Product> rawProduct =
+              dataResponse.map((e) => Product.fromJson(e)).toList();
+          productsByCategory.addAll(rawProduct);
+        } else {
+          hasNextPage.value = false;
+        }
+
+        loadingMoreProductsByCategory.value = false;
+      } catch (e) {
+        loadingMoreProductsByCategory.value = false;
+        print(e);
+      }
+    }
+  }
+
+  @override
+  void onInit() {
+    getPaginatedProducts();
+    super.onInit();
   }
 }

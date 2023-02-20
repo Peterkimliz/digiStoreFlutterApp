@@ -26,4 +26,10 @@ class CategoryController extends GetxController {
       print("error is $e");
     }
   }
+
+  @override
+  void onInit() {
+    fetchCategories();
+    super.onInit();
+  }
 }
