@@ -1,4 +1,5 @@
 import 'package:blurry_modal_progress_hud/blurry_modal_progress_hud.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:digi_store/controllers/category_controller.dart';
 import 'package:digi_store/controllers/product_controller.dart';
 import 'package:digi_store/models/categories.dart';
@@ -137,7 +138,6 @@ class Home extends StatelessWidget {
                                     : ListView.builder(
                                         scrollDirection: Axis.horizontal,
                                         shrinkWrap: true,
-                                        physics: BouncingScrollPhysics(),
                                         itemCount: categoryController
                                             .categories.length,
                                         itemBuilder: (context, index) {
@@ -155,17 +155,31 @@ class Home extends StatelessWidget {
                                               child: Column(
                                                 children: [
                                                   Container(
-                                                    height: 50,
-                                                    width: 50,
-                                                    decoration: BoxDecoration(
-                                                        borderRadius:
-                                                            BorderRadius
-                                                                .circular(25),
-                                                        image: DecorationImage(
+                                                    child: CircleAvatar(
+                                                      child: SizedBox(
+                                                        width: 60,
+                                                        height: 60,
+                                                        child: ClipOval(
+                                                          child:
+                                                              CachedNetworkImage(
+                                                            imageUrl:
+                                                                category.image!,
+                                                            progressIndicatorBuilder: (context,
+                                                                    url,
+                                                                    downloadProgress) =>
+                                                                CircularProgressIndicator(
+                                                                    value: downloadProgress
+                                                                        .progress),
+                                                            errorWidget: (context,
+                                                                    url,
+                                                                    error) =>
+                                                                const Icon(Icons
+                                                                    .error),
                                                             fit: BoxFit.cover,
-                                                            image: NetworkImage(
-                                                                category
-                                                                    .image!))),
+                                                          ),
+                                                        ),
+                                                      ),
+                                                    ),
                                                   ),
                                                   SizedBox(
                                                     height: 10,
@@ -215,6 +229,9 @@ class Home extends StatelessWidget {
                                         }),
                                   ),
                                 ],
+                              ),
+                              SizedBox(
+                                height: 20,
                               ),
                             ],
                           ),
