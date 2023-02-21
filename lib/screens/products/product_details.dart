@@ -29,271 +29,252 @@ class ProductDetails extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Obx(() {
-        return productController.loadingProductReviews.value
-            ? Center(
-                child: BlurryModalProgressHUD(
-                  inAsyncCall: productController.loadingProductReviews.value,
-                  blurEffectIntensity: 4,
-                  progressIndicator: SpinKitFadingCircle(
-                    color: Colors.green,
-                    size: 60.0,
-                  ),
-                  dismissible: false,
-                  opacity: 0.4,
-                  color: Colors.transparent,
-                  child: Scaffold(),
-                ),
-              )
-            : SafeArea(
-                child: SingleChildScrollView(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Stack(
-                        children: [
-                          SizedBox(
-                            height: 250,
-                            width: double.infinity,
-                            child: LightCarousel(
-                              boxFit: BoxFit.cover,
-                              autoPlay: false,
-                              animationCurve: Curves.fastOutSlowIn,
-                              animationDuration: Duration(milliseconds: 1000),
-                              dotSize: 6.0,
-                              dotIncreasedColor: Colors.green,
-                              dotBgColor: Colors.transparent,
-                              dotPosition: DotPosition.bottomCenter,
-                              dotVerticalPadding: 10.0,
-                              showIndicator: true,
-                              indicatorBgPadding: 7.0,
-                              dotSpacing: 15.0,
-                              dotColor: Colors.white,
-                              images: product.images!
-                                  .map(
-                                    (e) => NetworkImage(e),
-                                  )
-                                  .toList(),
-                            ),
-                          ),
-                          Positioned(
-                              top: 0,
-                              left: 0,
-                              right: 0,
-                              child: Padding(
-                                padding: const EdgeInsets.all(8.0),
-                                child: Row(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    IconButton(
-                                        onPressed: () {
-                                          Get.back();
-                                        },
-                                        icon: Icon(
-                                          Icons.arrow_back_ios,
-                                          color: Colors.white,
-                                        )),
-                                    IconButton(
-                                        onPressed: () {
-                                          productController.favouriteProduct(product: product);
-                                        },
-                                        icon: Icon(
-                                          Icons.favorite_outlined,
-                                          color: authController.currentUser
-                                                      .value?.wishlist
-                                                      ?.indexWhere((element) =>
-                                                          element ==
-                                                          product.id) !=
-                                                  -1
-                                              ? Colors.deepPurple
-                                              : Colors.white,
-                                        ))
-                                  ],
-                                ),
-                              ))
-                        ],
+        return SafeArea(
+          child: SingleChildScrollView(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Stack(
+                  children: [
+                    SizedBox(
+                      height: 250,
+                      width: double.infinity,
+                      child: LightCarousel(
+                        boxFit: BoxFit.cover,
+                        autoPlay: false,
+                        animationCurve: Curves.fastOutSlowIn,
+                        animationDuration: Duration(milliseconds: 1000),
+                        dotSize: 6.0,
+                        dotIncreasedColor: Colors.green,
+                        dotBgColor: Colors.transparent,
+                        dotPosition: DotPosition.bottomCenter,
+                        dotVerticalPadding: 10.0,
+                        showIndicator: true,
+                        indicatorBgPadding: 7.0,
+                        dotSpacing: 15.0,
+                        dotColor: Colors.white,
+                        images: product.images!
+                            .map(
+                              (e) => NetworkImage(e),
+                            )
+                            .toList(),
                       ),
-                      SizedBox(
-                        height: 10,
-                      ),
-                      Card(
-                        child: Container(
-                          padding: EdgeInsets.all(10),
-                          child: Column(
+                    ),
+                    Positioned(
+                        top: 0,
+                        left: 0,
+                        right: 0,
+                        child: Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Row(
                             crossAxisAlignment: CrossAxisAlignment.start,
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              bigTitle(
-                                  title: "${product.name}".capitalize,
-                                  color: Colors.black,
-                                  size: 18),
-                              SizedBox(
-                                height: 5,
-                              ),
-                              bigTitle(
-                                  title: " \$ ${product.price}",
-                                  color: Colors.red.shade400,
-                                  size: 20),
-                              SizedBox(
-                                height: 10,
-                              ),
-                              Row(
-                                children: [
-                                  bigTitle(
-                                      title: "Available Stock ",
-                                      color: Colors.black54),
-                                  smallTitle(
-                                      title: ": ${product.quantity}",
-                                      color: Colors.grey,
-                                      size: 18)
-                                ],
-                              ),
-                              SizedBox(
-                                height: 5,
-                              ),
-                              Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  smallTitle(
-                                      title: "By ${product.shop!.name} shop",
-                                      color: Colors.grey,
-                                      size: 14),
-                                  InkWell(
-                                    onTap: () {},
-                                    child: smallTitle(
-                                        title:
-                                            "View more from ${product.shop!.name} shop",
-                                        color: Colors.green,
-                                        size: 14),
-                                  ),
-                                ],
-                              ),
-                              Container(),
-                              Divider(
-                                thickness: 0.2,
+                              IconButton(
+                                  onPressed: () {
+                                    Get.back();
+                                  },
+                                  icon: Icon(
+                                    Icons.arrow_back_ios,
+                                    color: Colors.white,
+                                  )),
+                              IconButton(
+                                  onPressed: () {
+                                    productController.favouriteProduct(
+                                        product: product);
+                                  },
+                                  icon: Icon(
+                                    Icons.favorite_outlined,
+                                    color: authController
+                                                .currentUser.value?.wishlist
+                                                ?.indexWhere((element) =>
+                                                    element == product.id) !=
+                                            -1
+                                        ? Colors.white
+                                        : Colors.pinkAccent,
+                                  ))
+                            ],
+                          ),
+                        ))
+                  ],
+                ),
+                SizedBox(
+                  height: 10,
+                ),
+                Card(
+                  child: Container(
+                    padding: EdgeInsets.all(10),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        bigTitle(
+                            title: "${product.name}".capitalize,
+                            color: Colors.black,
+                            size: 18),
+                        SizedBox(
+                          height: 5,
+                        ),
+                        bigTitle(
+                            title: " \$ ${product.price}",
+                            color: Colors.red.shade400,
+                            size: 20),
+                        SizedBox(
+                          height: 10,
+                        ),
+                        Row(
+                          children: [
+                            bigTitle(
+                                title: "Available Stock ",
+                                color: Colors.black54),
+                            smallTitle(
+                                title: ": ${product.quantity}",
                                 color: Colors.grey,
-                              ),
-                              bigTitle(
-                                  title: "Description", color: Colors.black),
-                              SizedBox(
-                                height: 5,
-                              ),
-                              ReadMoreText(
-                                "${product.description}".capitalize!,
-                                trimLines: 2,
-                                colorClickableText: Colors.blue,
-                                trimMode: TrimMode.Line,
-                                trimCollapsedText: 'Show more',
-                                style:
-                                    TextStyle(color: Colors.grey, fontSize: 14),
-                                trimExpandedText: 'Show less',
-                                moreStyle: TextStyle(
-                                    fontSize: 14, color: Colors.black),
-                              ),
-                              SizedBox(
-                                height: 10,
-                              ),
-                            ],
-                          ),
+                                size: 18)
+                          ],
                         ),
-                      ),
-                      Card(
-                        elevation: 0,
-                        child: Container(
-                          padding: EdgeInsets.all(10),
-                          width: double.infinity,
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              bigTitle(
-                                  title: "Related Products",
-                                  color: Colors.black,
-                                  size: 18),
-                              SizedBox(
-                                height: 10,
-                              ),
-                              Container(
-                                height: 180,
-                                width: double.infinity,
-                                child: ListView.builder(
-                                    scrollDirection: Axis.horizontal,
-                                    shrinkWrap: true,
-                                    itemCount:
-                                        productController.products.length,
-                                    itemBuilder: (context, index) {
-                                      Product product = productController
-                                          .products
-                                          .elementAt(index);
-                                      return homeProductCard(product: product);
-                                    }),
-                              ),
-                            ],
-                          ),
+                        SizedBox(
+                          height: 5,
                         ),
-                      ),
-                      Card(
-                        child: Container(
-                          width: double.infinity,
-                          padding: EdgeInsets.all(10),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              bigTitle(
-                                  title: "Customer Reviews",
-                                  color: Colors.black,
-                                  size: 18),
-                              SizedBox(
-                                height: 5,
-                              ),
-                              Row(
-                                children: [
-                                  RatingBarIndicator(
-                                    rating:
-                                        productController.avarageReviews.value,
-                                    itemBuilder: (context, index) => Icon(
-                                      Icons.star,
-                                      color: Colors.amber,
-                                    ),
-                                    itemCount: 5,
-                                    itemSize: 20.0,
-                                    direction: Axis.horizontal,
-                                  ),
-                                  SizedBox(
-                                    width: 5,
-                                  ),
-                                  smallTitle(
-                                      title:
-                                          "(${productController.productReviews.length})",
-                                      color: Colors.grey),
-                                ],
-                              ),
-                              SizedBox(
-                                height: 5,
-                              ),
-                              productController.productReviews.length == 0
-                                  ? Center(
-                                      child: Text(
-                                          "This product doesnot have reviews yet"),
-                                    )
-                                  : ListView.builder(
-                                      itemCount: productController
-                                          .productReviews.length,
-                                      shrinkWrap: true,
-                                      itemBuilder: (context, index) {
-                                        ProductReview productReview =
-                                            productController.productReviews
-                                                .elementAt(index);
-                                        return userReviewCard(productReview);
-                                      })
-                            ],
-                          ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            smallTitle(
+                                title: "By ${product.shop!.name} shop",
+                                color: Colors.grey,
+                                size: 14),
+                            InkWell(
+                              onTap: () {},
+                              child: smallTitle(
+                                  title: "View more",
+                                  color: Colors.green,
+                                  size: 14),
+                            ),
+                          ],
                         ),
-                      ),
-                    ],
+                        Container(),
+                        Divider(
+                          thickness: 0.2,
+                          color: Colors.grey,
+                        ),
+                        bigTitle(title: "Description", color: Colors.black),
+                        SizedBox(
+                          height: 5,
+                        ),
+                        ReadMoreText(
+                          "${product.description}".capitalize!,
+                          trimLines: 2,
+                          colorClickableText: Colors.blue,
+                          trimMode: TrimMode.Line,
+                          trimCollapsedText: 'Show more',
+                          style: TextStyle(color: Colors.grey, fontSize: 14),
+                          trimExpandedText: 'Show less',
+                          moreStyle:
+                              TextStyle(fontSize: 14, color: Colors.black),
+                        ),
+                        SizedBox(
+                          height: 10,
+                        ),
+                      ],
+                    ),
                   ),
                 ),
-              );
+                Card(
+                  elevation: 0,
+                  child: Container(
+                    padding: EdgeInsets.all(10),
+                    width: double.infinity,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        bigTitle(
+                            title: "Related Products",
+                            color: Colors.black,
+                            size: 18),
+                        SizedBox(
+                          height: 10,
+                        ),
+                        Container(
+                          height: 180,
+                          width: double.infinity,
+                          child: ListView.builder(
+                              scrollDirection: Axis.horizontal,
+                              shrinkWrap: true,
+                              itemCount: productController.products.length,
+                              itemBuilder: (context, index) {
+                                Product product =
+                                    productController.products.elementAt(index);
+                                return homeProductCard(product: product);
+                              }),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+                Card(
+                  child: Container(
+                    width: double.infinity,
+                    padding: EdgeInsets.all(10),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        bigTitle(
+                            title: "Customer Reviews",
+                            color: Colors.black,
+                            size: 18),
+                        SizedBox(
+                          height: 5,
+                        ),
+                        Row(
+                          children: [
+                            RatingBarIndicator(
+                              rating: productController.avarageReviews.value,
+                              itemBuilder: (context, index) => Icon(
+                                Icons.star,
+                                color: Colors.amber,
+                              ),
+                              itemCount: 5,
+                              itemSize: 20.0,
+                              direction: Axis.horizontal,
+                            ),
+                            SizedBox(
+                              width: 5,
+                            ),
+                            smallTitle(
+                                title:
+                                    "(${productController.productReviews.length})",
+                                color: Colors.grey),
+                          ],
+                        ),
+                        SizedBox(
+                          height: 5,
+                        ),
+                        productController.loadingProductReviews.value
+                            ? Center(
+                                child: CircularProgressIndicator(),
+                              )
+                            : productController.productReviews.length == 0
+                                ? Center(
+                                    child: Text(
+                                        "This product doesnot have reviews yet"),
+                                  )
+                                : ListView.builder(
+                                    itemCount:
+                                        productController.productReviews.length,
+                                    shrinkWrap: true,
+                                    itemBuilder: (context, index) {
+                                      ProductReview productReview =
+                                          productController.productReviews
+                                              .elementAt(index);
+                                      return userReviewCard(productReview);
+                                    })
+                      ],
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        );
       }),
       bottomNavigationBar: BottomAppBar(
         child: Obx(() => Container(

@@ -129,8 +129,8 @@ Widget homeProductCard({required Product product}) {
                                   ?.indexWhere(
                                       (element) => element == product.id) !=
                               -1
-                          ? Colors.deepPurple
-                          : Colors.white,
+                          ? Colors.white
+                          : Colors.pinkAccent,
                     ),
                   ))
             ],
